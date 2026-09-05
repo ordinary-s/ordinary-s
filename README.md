@@ -1,31 +1,33 @@
-# Hi, I'm ordinary-s
+# 你好，我是 ordinary-s
 
-### Java Backend × AI Agent Engineer
+### Java 后端 × AI Agent 工程师
 
-Building reliable AI Agent systems with Java, Spring Boot, and LLM engineering.
+以 Java 和 Spring Boot 为基础，探索可靠的 AI Agent 系统与大模型应用工程。
 
-**Agent Runtime · Tool Calling · MCP · State Recovery · Distributed Systems**
+**Agent Runtime · Tool Calling · MCP · 状态恢复 · 分布式系统**
 
-## About Me
+## 关于我
 
-I focus on the backend engineering behind AI agents: restoring conversation state safely, coordinating execution across replicas, and making tool and protocol behavior predictable. My open source contributions below document the problems, implementation choices, and regression tests.
+我关注 AI Agent 背后的后端工程：会话状态能否正确恢复，多个服务副本之间如何协调执行，工具调用和协议交互在异常情况下会怎样处理。
 
-## Engineering Profile
+目前的开源贡献主要围绕 Agent 状态恢复、跨副本执行协调、子 Agent 的工具边界，以及 MCP 协议交互展开。我习惯从可复现的问题入手，定位根因、明确改动范围，再用回归测试验证行为。下面的 PR 记录了这些工作的实现过程与验证结果。
 
-| Area | Engineering interests |
+## 工程方向
+
+| 方向 | 关注内容 |
 | --- | --- |
-| Java backend | Java, Spring Boot, Spring MVC / WebFlux, distributed systems |
-| Agent runtime | Agent State Recovery, persisted state, failure propagation, subagents and hooks |
-| Tools & protocols | MCP, Tool Calling, tool filtering, execution and security boundaries |
-| Data & retrieval | PostgreSQL, Redis, Elasticsearch, Milvus, RAG and retrieval pipelines |
+| Java 后端 | Java、Spring Boot、Spring MVC / WebFlux、分布式系统 |
+| Agent 运行时 | Agent State Recovery、状态持久化、异常传播、子 Agent 与 Hooks |
+| 工具与协议 | MCP、Tool Calling、工具过滤、执行与安全边界 |
+| 数据与检索 | PostgreSQL、Redis、Elasticsearch、Milvus、RAG 与检索流程 |
 
-## Current Focus
+## 当前关注
 
-- **Reliable agent execution:** state restoration, Agent Resume, atomic ownership, and distributed coordination.
-- **LLM application infrastructure:** MCP integration, tool lifecycles, RAG, Hybrid Retrieval, and Reranker evaluation.
-- **Open Source Contribution:** reproducible failures, root cause analysis, focused fixes, benchmarks, and regression testing.
+- **Agent 执行可靠性：** 状态恢复、Agent Resume、执行权的原子抢占与分布式协调。
+- **大模型应用基础设施：** MCP 集成、工具生命周期、RAG、混合检索（Hybrid Retrieval）与重排序（Reranker）评估。
+- **开源工程实践：** 问题复现、根因分析、针对性修复、性能基准与回归测试。
 
-## Tech Stack
+## 技术栈
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=java%2Cspring%2Cpython%2Cpostgres%2Credis%2Celasticsearch%2Cdocker%2Ckubernetes%2Cgit%2Cgithub%2Clinux%2Cmaven%2Cgradle&amp;perline=7&amp;theme=dark" />
@@ -35,76 +37,76 @@ I focus on the backend engineering behind AI agents: restoring conversation stat
 
 ![Milvus](https://img.shields.io/badge/Milvus-Vector%20Database-0077C8?style=flat-square)
 
-**AI engineering:** LLM · RAG · AI Agent · MCP · Tool Calling · Agent Runtime · State Recovery · Hybrid Retrieval · Reranker
+**AI 工程：** LLM · RAG · AI Agent · MCP · Tool Calling · Agent Runtime · State Recovery · Hybrid Retrieval · Reranker
 
-## Selected Open Source Contributions
+## 代表性开源贡献
 
-PR authorship and status verified on **2026-09-06**. Each link opens the upstream PR and its current status.
+以下 PR 的作者与状态已于 **2026-09-06** 核实。点击链接可查看上游讨论、代码改动与最新状态。
 
-### ✅ Merged
+### ✅ 已合并（Merged）
 
-**[AgentScope Java #2760 — Propagate agent state load failures](https://github.com/agentscope-ai/agentscope-java/pull/2760)**<br>
-Agent Runtime · Agent State Recovery · Persisted State
+**[AgentScope Java #2760 — 向上抛出 Agent 状态加载异常](https://github.com/agentscope-ai/agentscope-java/pull/2760)**<br>
+Agent Runtime · Agent State Recovery · 状态持久化
 
-Propagated state loading and decoding failures instead of silently creating an empty `AgentState`. This prevents failed recovery from being treated as a new session and potentially overwriting valid persisted conversation state. Added regression coverage for failure, missing-state, restoration, and cache/persistence integrity paths.
+修复状态加载或解码失败后静默创建空 `AgentState` 的问题，让原始异常传递给调用方，避免将恢复失败误判为新会话，进而覆盖有效的持久化会话状态。补充了加载失败、状态不存在、已有状态恢复，以及缓存与持久化数据完整性的回归测试。
 
-**[DBX #7315 — Reduce HTTP tunnel round-trip latency](https://github.com/t8y2/dbx/pull/7315)**<br>
-Root Cause Analysis · Network / I/O Latency · Adaptive Polling
+**[DBX #7315 — 降低 HTTP 隧道的往返延迟](https://github.com/t8y2/dbx/pull/7315)**<br>
+根因分析 · 网络 / I/O 延迟 · 自适应轮询
 
-Traced sequential exchange latency to the PHP worker's socket-only wait, which could not be woken by incoming file-queue writes. Added bounded adaptive polling and regression tests for forwarding, polling transitions, and shutdown.
+定位到 PHP worker 等待时只监听数据库 socket，文件队列的新写入无法将其唤醒，导致连续协议交互累积延迟。引入有界自适应轮询，并补充数据转发、轮询状态切换和进程关闭的回归测试。
 
-| Benchmark: 100 sequential round trips | Before | After |
+| 基准测试：100 次顺序往返 | 优化前 | 优化后 |
 | --- | ---: | ---: |
-| Total time | 20.100 s | 1.073 s |
+| 总耗时 | 20.100 s | 1.073 s |
 
-**Approximately 18.7× faster in this benchmark.** Measured with the real PHP worker and file queues on PHP 7.4/Linux against a local deterministic TCP echo target; this is not a general database performance claim.
+**该基准下速度约为原来的 18.7 倍（18.7×）。** 测试在 PHP 7.4/Linux 上使用真实 PHP worker、文件队列和本地确定性 TCP echo 目标完成；结果仅对应这一测试场景，不代表通用数据库性能提升。
 
-### 🔍 In Review
+### 🔍 审查中（In Review）
 
-These PRs are open and have not been merged.
+以下 PR 当前仍为 Open，尚未合并。
 
-**[AgentScope Java #2890 — Share resume coordination state across replicas](https://github.com/agentscope-ai/agentscope-java/pull/2890)**<br>
-Multi-replica · Redis · Lua · Atomic Ownership · Agent Resume
+**[AgentScope Java #2890 — 在多个副本间共享恢复执行的协调状态](https://github.com/agentscope-ai/agentscope-java/pull/2890)**<br>
+多副本 · Redis · Lua · 执行权原子抢占 · Agent Resume
 
-Proposes a shared resume state store, Redis Lua scripts for atomic ownership and state transitions, and Spring MVC / WebFlux integration. Tests cover cross-replica coordination and competing claims. Hard-crash stale ownership remains a documented limitation; lease renewal and fencing are follow-up work.
+提出共享的恢复执行状态存储，通过 Redis Lua 脚本原子地处理执行权和状态转换，并接入 Spring MVC / WebFlux。测试覆盖跨副本协调与并发抢占。进程硬崩溃后可能遗留执行权占用，这是 PR 已记录的限制；租约续期和 fencing 机制仍需后续完善。
 
-**[AgentScope Java #2996 — Inherit parent hooks in declared subagents](https://github.com/agentscope-ai/agentscope-java/pull/2996)**<br>
-Subagent · Hooks · Tool Calling · Agent Harness · Security Boundaries
+**[AgentScope Java #2996 — 让声明式子 Agent 继承父 Agent 的 Hooks](https://github.com/agentscope-ai/agentscope-java/pull/2996)**<br>
+Subagent · Hooks · Tool Calling · Agent Harness · 安全边界
 
-Proposes inheriting explicitly configured parent hooks in declared subagents while applying declaration and workspace tool filters to hook-contributed tools. Regression tests cover child tool execution, argument interception, denied tools, and hook ordering.
+提出让声明式子 Agent 继承父 Agent 显式配置的 Hooks，同时对 Hooks 注入的工具应用声明允许列表与工作区工具过滤规则。回归测试覆盖子 Agent 的工具执行、参数拦截、受限工具的拒绝执行，以及 Hook 顺序。
 
-**[MCP Java SDK #1098 — Fix roots/list_changed handling for stateful clients](https://github.com/modelcontextprotocol/java-sdk/pull/1098)**<br>
-Java · MCP · Stateful Client · Notifications · Protocol Runtime
+**[MCP Java SDK #1098 — 修复有状态客户端的 roots/list_changed 通知处理](https://github.com/modelcontextprotocol/java-sdk/pull/1098)**<br>
+Java · MCP · Stateful Client · 通知处理 · 协议运行时
 
-Proposes skipping unnecessary roots listing when no roots change consumer is registered, so `roots/list_changed` notification handling does not block until the request timeout. Includes integration regression coverage.
+提出在未注册 roots 变更消费者时跳过不必要的 roots 列举请求，避免 `roots/list_changed` 通知处理一直阻塞到请求超时，并补充集成回归测试。
 
-## GitHub Analytics
+## GitHub 数据
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./profile/stats-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="./profile/stats.svg" />
-  <img alt="ordinary-s GitHub statistics" src="./profile/stats.svg" width="420" />
+  <img alt="ordinary-s 的 GitHub 统计" src="./profile/stats.svg" width="420" />
 </picture>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./profile/top-langs-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="./profile/top-langs.svg" />
-  <img alt="Languages across ordinary-s public repositories" src="./profile/top-langs.svg" width="330" />
+  <img alt="ordinary-s 非 Fork 公开仓库的语言分布" src="./profile/top-langs.svg" width="330" />
 </picture>
 
-Public activity cards generated daily with [GitHub Readme Stats Action](https://github.com/stats-organization/github-readme-stats-action). The language card covers non-fork public repositories; it currently has no language data. My upstream engineering work is documented in the PRs above.
+公开活动卡片由 [GitHub Readme Stats Action](https://github.com/stats-organization/github-readme-stats-action) 每日生成。语言卡只统计非 Fork 公开仓库，目前暂无语言数据；参与上游项目的工程工作见上方 PR。
 
-## 3D Contribution Graph
+## 3D 贡献图
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-rainbow.svg" />
   <source media="(prefers-color-scheme: light)" srcset="./profile-3d-contrib/profile-green.svg" />
-  <img alt="ordinary-s 3D contribution graph" src="./profile-3d-contrib/profile-night-rainbow.svg" width="900" />
+  <img alt="ordinary-s 的 3D 贡献图" src="./profile-3d-contrib/profile-night-rainbow.svg" width="900" />
 </picture>
 
-## Contribution Snake
+## 贡献贪吃蛇
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ordinary-s/ordinary-s/output/github-snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ordinary-s/ordinary-s/output/github-snake.svg" />
-  <img alt="Snake animation of ordinary-s GitHub contributions" src="https://raw.githubusercontent.com/ordinary-s/ordinary-s/output/github-snake.svg" width="900" />
+  <img alt="ordinary-s 的 GitHub 贡献贪吃蛇动画" src="https://raw.githubusercontent.com/ordinary-s/ordinary-s/output/github-snake.svg" width="900" />
 </picture>
