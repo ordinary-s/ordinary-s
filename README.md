@@ -91,7 +91,7 @@ Proposes skipping unnecessary roots listing when no roots change consumer is reg
   <img alt="Languages across ordinary-s public repositories" src="./profile/top-langs.svg" width="330" />
 </picture>
 
-Public activity cards generated daily with [GitHub Readme Stats Action](https://github.com/stats-organization/github-readme-stats-action). Language distribution reflects repository code, not proficiency or the full scope of upstream contributions.
+Public activity cards generated daily with [GitHub Readme Stats Action](https://github.com/stats-organization/github-readme-stats-action). The language card covers non-fork public repositories; it currently has no language data. My upstream engineering work is documented in the PRs above.
 
 ## 3D Contribution Graph
 
