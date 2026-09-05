@@ -28,9 +28,9 @@ I focus on the backend engineering behind AI agents: restoring conversation stat
 ## Tech Stack
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=java,spring,python,postgres,redis,elasticsearch,docker,kubernetes,git,github,linux,maven,gradle&amp;perline=7&amp;theme=dark" />
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=java,spring,python,postgres,redis,elasticsearch,docker,kubernetes,git,github,linux,maven,gradle&amp;perline=7&amp;theme=light" />
-  <img alt="Java, Spring Boot, Python, PostgreSQL, Redis, Elasticsearch, Docker, Kubernetes, Git, GitHub, Linux, Maven, Gradle" src="https://skillicons.dev/icons?i=java,spring,python,postgres,redis,elasticsearch,docker,kubernetes,git,github,linux,maven,gradle&amp;perline=7&amp;theme=light" />
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=java%2Cspring%2Cpython%2Cpostgres%2Credis%2Celasticsearch%2Cdocker%2Ckubernetes%2Cgit%2Cgithub%2Clinux%2Cmaven%2Cgradle&amp;perline=7&amp;theme=dark" />
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=java%2Cspring%2Cpython%2Cpostgres%2Credis%2Celasticsearch%2Cdocker%2Ckubernetes%2Cgit%2Cgithub%2Clinux%2Cmaven%2Cgradle&amp;perline=7&amp;theme=light" />
+  <img alt="Java, Spring Boot, Python, PostgreSQL, Redis, Elasticsearch, Docker, Kubernetes, Git, GitHub, Linux, Maven, Gradle" src="https://skillicons.dev/icons?i=java%2Cspring%2Cpython%2Cpostgres%2Credis%2Celasticsearch%2Cdocker%2Ckubernetes%2Cgit%2Cgithub%2Clinux%2Cmaven%2Cgradle&amp;perline=7&amp;theme=light" />
 </picture>
 
 ![Milvus](https://img.shields.io/badge/Milvus-Vector%20Database-0077C8?style=flat-square)
