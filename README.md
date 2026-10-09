@@ -56,13 +56,6 @@
 
 公开活动卡片由 [GitHub Readme Stats Action](https://github.com/stats-organization/github-readme-stats-action) 每日生成。语言卡只统计非 Fork 公开仓库，目前暂无语言数据；参与上游项目的工程工作见上方 PR。
 
-## 3D 贡献图
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-rainbow.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="./profile-3d-contrib/profile-green.svg" />
-  <img alt="ordinary-s 的 3D 贡献图" src="./profile-3d-contrib/profile-night-rainbow.svg" width="900" />
-</picture>
 
 ## 贡献贪吃蛇
 
